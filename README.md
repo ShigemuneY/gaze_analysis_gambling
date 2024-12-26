@@ -1,5 +1,6 @@
-# gaze_analysis_gambling
-MATLAB scripts for analyzing eye-tracking data in gambling tasks - Merges behavioral data, calculates gaze allocation, and analyzes peak gaze positions
+# GazeAnalysisGambling
+
+A collection of MATLAB scripts for analyzing eye-tracking data in a gambling task.
 
 ## Overview
 
@@ -10,6 +11,34 @@ This script collection performs four main analyses:
 3. Detects peak gaze positions for left and right sides
 4. Calculates gaze allocation time within customizable concentric zones around peak positions
 
+## Directory Structure
+
+Each script is contained in its own directory with corresponding input/output folders:
+
+    project_directory/
+    ├── 01_merge_gaze_behavioral/
+    │   ├── Input_Behavior/    # For behavioral data (.xlsx)
+    │   ├── Input_EyeTracking/ # For eye-tracking data (.xlsx)
+    │   ├── Output/            # For merged results
+    │   └── merge_gaze_behavioral_v1.m
+    │
+    ├── 02_calculate_gaze_ratios/
+    │   ├── Input/             # Place output from 01_merge_gaze_behavioral here
+    │   ├── Output/            # For gaze ratio results
+    │   └── calculate_gaze_ratios_v1.m
+    │
+    ├── 03_detect_gaze_peaks/
+    │   ├── Input/             # Place output from 02_calculate_gaze_ratios here
+    │   ├── Output/            # For peak detection results
+    │   └── detect_gaze_peaks_v1.m
+    │
+    └── 04_analyze_concentric_zones/
+        ├── Input/             # Place output from 01_merge_gaze_behavioral here
+        ├── Output/            # For concentric zone analysis results
+        └── analyze_concentric_zones_v1.m
+
+Note: The `.gitkeep` files in empty directories are used to maintain the directory structure in GitHub. These files can be safely kept or deleted after downloading the repository - they do not affect the scripts' functionality.
+
 ## Requirements
 
 ### Required External Functions
@@ -19,13 +48,11 @@ These scripts require two external functions from MATLAB File Exchange:
   - Author: Brett Shoelson, Ph.D.
   - Source: MATLAB Central File Exchange
   - File ID: 4415
-  - Citation: Brett Shoelson (2024). readfromexcel (https://www.mathworks.com/matlabcentral/fileexchange/4415-readfromexcel), MATLAB Central File Exchange. Retrieved December 26, 2024.
 
 * xlswrite:
   - Author: Andreas Sprenger (based on Scott Hirsch's original work)
   - Source: MATLAB Central File Exchange
   - File ID: 7881
-  - Citation: Andreas Sprenger (2024). xlswrite (https://www.mathworks.com/matlabcentral/fileexchange/7881-xlswrite), MATLAB Central File Exchange. Retrieved December 26, 2024.
 
 
 ## Usage
