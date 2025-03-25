@@ -55,7 +55,7 @@ if size(SUBJ.dataSet01,1) > 0
             % Count number of events & exclide them
             empty_counter = 0;
             for p = 1 : size(SubDataSet02,1)                
-                if  isempty(SubDataSet02{p,38}) == 0 % colun 38: event
+                if  isempty(SubDataSet02{p,38}) == 0 % column 38: event
                     empty_counter = empty_counter + 1;
                 end
             end
@@ -76,22 +76,22 @@ if size(SUBJ.dataSet01,1) > 0
                 end
             end
             
-            %　Calcurate duration
+            %ﾂ　Calcurate duration
             for r = 1 : size(SubDataSet03,1)                   
                 if r ~= size(SubDataSet03,1)
-                    SubDataSet03(r,end) = [{(SubDataSet03{r+1,37} -  SubDataSet03{r,37})/1000}]; % colum 37: timestamp
+                    SubDataSet03(r,end) = [{(SubDataSet03{r+1,37} -  SubDataSet03{r,37})/1000}]; % column 37: timestamp
                 end
             end
             
-            %　Identify phase 
+            %ﾂ　Identify phase 
             data_counter_t0 = 0;
             data_counter_t1 = 0;
             for k = 1 : EXPER.numTrials(absRun)
                 
-                end_dec = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k,21}; % end of decision = onset of feedback (colum 21)
+                end_dec = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k,21}; % end of decision = onset of feedback (column 21)
                 end_fed = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k,21} + EXPER.trialFed; % end of feedback = onset of feedback + duration of feedback                 
                 if k ~=  EXPER.numTrials(absRun)
-                    end_fix = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k+1,20}; % end of fixation = onset of next trial (colum 20)
+                    end_fix = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k+1,20}; % end of fixation = onset of next trial (column 20)
                 else 
                     end_fix = SubDataSet01{sum(EXPER.numTrials(1:(absRun-1)))+k,21} + EXPER.trialFed + EXPER.trialFix; % onset of feedback + duration of feedback & fixation
                 end
@@ -99,7 +99,7 @@ if size(SUBJ.dataSet01,1) > 0
                 data_counter_t0 = data_counter_t0 + data_counter_t1;
                 data_counter_t1 = 0;                
                 for q = data_counter_t0+1:size(SubDataSet03,1)
-                    if (SubDataSet03{q,37} - SubDataSet03{1,37})/1000 >= end_fix % colum 37: timestamp
+                    if (SubDataSet03{q,37} - SubDataSet03{1,37})/1000 >= end_fix % column 37: timestamp
                         break
                     end
                     data_counter_t1 = data_counter_t1 + 1;
