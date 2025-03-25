@@ -9,7 +9,7 @@ function analyze_concentric_zones_v1
 %
 % Author: Y. Shigemune
 % Released: 12/26/2024
-% Last Modified:  12/26/2024
+% Last Modified:  3/25/2025
 %
 % Parameters:
 %   - r: Base radius in pixels for zone calculation (default: 25px)
@@ -39,7 +39,7 @@ CurToPath =  strcat(curDir, filesep, 'Output');
 SUBJ.dataSet = dir(fullfile(CurFromPath,'*.xlsx'));
 
 % set concentric zones
-r = 25; %@radius
+r = 25; % radius
 Repeat = 4; % number of zones
 
 % set ditection type
@@ -78,15 +78,15 @@ if size(SUBJ.dataSet,1) > 0
         [x,FileName,y] = fileparts(SUBJ.dataSet(iCurFile).name);
         DataSet(iCurFile,1) =[{FileName}];
         
-        % Left peak
+        % Left/1st peak
         subPeak01X = Peaks{iCurFile,2};
         subPeak01Y = Peaks{iCurFile,3};
         
-        % Right peak
+        % Right/2nd peak
         subPeak02X = Peaks{iCurFile,4};
         subPeak02Y = Peaks{iCurFile,5};
         
-        % for left peak
+        % for left/1st peak
         Total_Duration = 0;
         
         % create buffers for each zone
@@ -97,13 +97,13 @@ if size(SUBJ.dataSet,1) > 0
         % add duration for each pixel to the appropriate buffer
         for iCurLine = 1 : size(SubDataSet,1)
             if isnan(SubDataSet{iCurLine,2}) == 0
-                if SubDataSet{iCurLine,33} == 1 % colum 33: phase
+                if SubDataSet{iCurLine,33} == 1 % column 33: phase
                     for iCurZone = 1 : Repeat
                         if eval([sprintf('(SubDataSet{iCurLine,73}-subPeak01X)^2 + (SubDataSet{iCurLine,74}-subPeak01Y)^2 <= (r*%d)^2 && (SubDataSet{iCurLine,73}-subPeak01X)^2 + (SubDataSet{iCurLine,74}-subPeak01Y)^2 > (r*(%d-1))^2',iCurZone,iCurZone)])
                             eval([sprintf('Circle_Duration_%02d = Circle_Duration_%02d + SubDataSet{iCurLine,130};',iCurZone,iCurZone)]);
                         end
                     end
-                    Total_Duration = Total_Duration + SubDataSet{iCurLine,130}; % colum 130: duration
+                    Total_Duration = Total_Duration + SubDataSet{iCurLine,130}; % column 130: duration
                 end
             end
         end
@@ -113,7 +113,7 @@ if size(SUBJ.dataSet,1) > 0
             eval([sprintf('DataSet{iCurFile,1+%d} =  Circle_Duration_%02d/Total_Duration*100;',iCurZone,iCurZone)]);
         end
         
-        % for right peak
+        % for right/2nd peak
         Total_Duration = 0;
         
         % create buffers for each zone
@@ -124,13 +124,13 @@ if size(SUBJ.dataSet,1) > 0
         % add duration for each pixel to the appropriate buffer
         for iCurLine = 1 : size(SubDataSet,1)
             if isnan(SubDataSet{iCurLine,2}) == 0
-                if SubDataSet{iCurLine,33} == 1 % colum 33: phase
+                if SubDataSet{iCurLine,33} == 1 % column 33: phase
                     for iCurZone = 1 : Repeat
                         if eval([sprintf('(SubDataSet{iCurLine,73}-subPeak02X)^2 + (SubDataSet{iCurLine,74}-subPeak02Y)^2 <= (r*%d)^2 && (SubDataSet{iCurLine,73}-subPeak02X)^2 + (SubDataSet{iCurLine,74}-subPeak02Y)^2 > (r*(%d-1))^2',iCurZone,iCurZone)])
                             eval([sprintf('Circle_Duration_%02d = Circle_Duration_%02d + SubDataSet{iCurLine,130};',iCurZone,iCurZone)]);
                         end
                     end
-                    Total_Duration = Total_Duration + SubDataSet{iCurLine,130}; % colum 130: duration
+                    Total_Duration = Total_Duration + SubDataSet{iCurLine,130}; % column 130: duration
                 end
             end
         end
