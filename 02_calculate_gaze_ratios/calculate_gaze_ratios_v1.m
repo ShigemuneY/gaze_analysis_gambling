@@ -44,13 +44,9 @@ if size(SUBJ.dataSet,1) > 0
     Cordinate =cell(Resolution_W*Resolution_H,2);
     Cordinate(:,:)=[{0}];
     
-    xCounter = 0;
     for x = 1 : Resolution_W % width
-        xCounter = xCounter + 1;
-        yCounter = 0;
         for y = 1: Resolution_H % height 
-            yCounter = yCounter + 1;
-            Cordinate{Resolution_H*(x-1)+y,1} = xCounter;
+            Cordinate{Resolution_H*(x-1)+y,1} = x;
             Cordinate{Resolution_H*(x-1)+y,2} = y;
         end
     end
@@ -62,7 +58,7 @@ if size(SUBJ.dataSet,1) > 0
         SubDataSet = readfromexcel(fullfile(CurFromPath, SUBJ.dataSet(iCurFile).name),'sheet','Sheet1','All');
         SubDataSet = SubDataSet(2:end,:); 
         
-        DataSet=cell(Resolution_W*Resolution_H,3); % Lene: Resolution, Colum: Phase
+        DataSet=cell(Resolution_W*Resolution_H,3); % Line: Cordinate, Column: Phase
         DataSet(:,:)=[{0}];
         
         % to calculate total time of valid measurement
@@ -71,7 +67,7 @@ if size(SUBJ.dataSet,1) > 0
         tFixation=0;
         
         for iCurLine = 1 : size(SubDataSet,1)
-            if  isnan(SubDataSet{iCurLine,73}) == 0 && isnan(SubDataSet{iCurLine,74}) == 0 % colom 73: Gaze point X, colom 74: Gaze point Y 
+            if  isnan(SubDataSet{iCurLine,73}) == 0 && isnan(SubDataSet{iCurLine,74}) == 0 % Column 73: Gaze point X, Column 74: Gaze point Y 
                 if  0 < SubDataSet{iCurLine,73} && SubDataSet{iCurLine,73} <= Resolution_W 
                     if 0 < SubDataSet{iCurLine,74} && SubDataSet{iCurLine,74} <= Resolution_H                        
                         if SubDataSet{iCurLine,33} == 1  % colom 33: Phase 
@@ -85,7 +81,7 @@ if size(SUBJ.dataSet,1) > 0
                 end
             end 
             if SubDataSet{iCurLine,33} == 1
-                tResponse = tResponse + SubDataSet{iCurLine,130};  % colom 130: Duration 
+                tResponse = tResponse + SubDataSet{iCurLine,130};  % Column 130: Duration 
             elseif SubDataSet{iCurLine,33} == 2
                 tFeedback = tFeedback + SubDataSet{iCurLine,130};
             elseif SubDataSet{iCurLine,33} == 3
