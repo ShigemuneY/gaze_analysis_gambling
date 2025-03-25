@@ -6,7 +6,7 @@ function calculate_gaze_ratios_v1
 %
 % Author: Y. Shigemune
 % Released: 12/26/2024
-% Last Modified:  12/26/2024
+% Last Modified:  3/25/2025
 %
 % Parameters:
 %   Resolution_W - Screen width (default: 1024)
@@ -70,7 +70,7 @@ if size(SUBJ.dataSet,1) > 0
             if  isnan(SubDataSet{iCurLine,73}) == 0 && isnan(SubDataSet{iCurLine,74}) == 0 % Column 73: Gaze point X, Column 74: Gaze point Y 
                 if  0 < SubDataSet{iCurLine,73} && SubDataSet{iCurLine,73} <= Resolution_W 
                     if 0 < SubDataSet{iCurLine,74} && SubDataSet{iCurLine,74} <= Resolution_H                        
-                        if SubDataSet{iCurLine,33} == 1  % colom 33: Phase 
+                        if SubDataSet{iCurLine,33} == 1  % Column 33: Phase 
                             DataSet{Resolution_H*(SubDataSet{iCurLine,73}-1)+SubDataSet{iCurLine,74},1} = DataSet{Resolution_H*(SubDataSet{iCurLine,73}-1)+SubDataSet{iCurLine,74},1} + SubDataSet{iCurLine,130};
                         elseif SubDataSet{iCurLine,33} == 2
                             DataSet{Resolution_H*(SubDataSet{iCurLine,73}-1)+SubDataSet{iCurLine,74},2} = DataSet{Resolution_H*(SubDataSet{iCurLine,73}-1)+SubDataSet{iCurLine,74},2} + SubDataSet{iCurLine,130};
