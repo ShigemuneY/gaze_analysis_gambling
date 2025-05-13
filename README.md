@@ -117,7 +117,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you use these scripts in your research, please cite the following paper:
 
 Paper:
-[Under Review]
+Shigemune, Y., Midorikawa, A. Focal attention peaks and laterality bias in problem gamblers: an eye-tracking investigation. Cogn Neurodyn 19, 51 (2025). https://doi.org/10.1007/s11571-025-10238-w
 
 Software:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14556986.svg)](https://doi.org/10.5281/zenodo.14556986)
